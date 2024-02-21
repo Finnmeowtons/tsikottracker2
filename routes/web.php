@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Employees;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,9 +35,19 @@ Route::get('/offers', function () {
     return view('offers');
 });
 
+
+/*
+Employee Routes
+*/
 Route::get('/employees', function () {
     return view('employees');
 });
+Route::get('/employees', [Employees::class, 'index']); 
+
+
+
+
+
 
 Route::get('/customers', function () {
     return view('customers');

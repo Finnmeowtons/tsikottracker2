@@ -44,29 +44,32 @@
                 <option value="0">CJS</option>
               </select>
             </div>
-            <div class="col d-flex justify-content-end"> <button class="btn btn-primary" style="width:200px;">Add Employee</button>
+            <div class="col d-flex justify-content-end"> <button class="btn btn-primary" style="width:200px;">Add
+                Employee</button>
             </div>
           </div>
         </div>
 
         <div class="table-container mx-auto" style="max-width: 1000px">
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Contact Number</th>
-              <th scope="col">Position</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Rodel</th>
-              <td>Mark</td>
-              <td>Otto</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Contact Number</th>
+                <th scope="col">Position</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($employees as $employee)
+              <tr>
+                <th scope="row">{{ $employee->name }}</th>
+                <td>{{ $employee->contact_details }}</td>
+                <td>{{ $employee->position }}</td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 
