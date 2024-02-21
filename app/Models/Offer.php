@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ServiceProduct extends Model
+class Offer extends Model
 {
     use HasFactory;
 
@@ -13,7 +13,7 @@ class ServiceProduct extends Model
         'name',
         'price',
         'type',
-        'company_id',
+        'company_id'
     ];
 
     public function company()

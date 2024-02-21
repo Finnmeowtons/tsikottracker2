@@ -24,9 +24,9 @@ class Record extends Model
         return $this->belongsTo(Customer::class);
     }
 
-    public function serviceProduct()
+    public function offer()
     {
-        return $this->belongsTo(ServiceProduct::class);
+        return $this->belongsTo(Offer::class);
     }
 
     public function company()

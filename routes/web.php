@@ -18,6 +18,34 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/companydashboard', function () {
+    return view('companydashboard');
+});
+
+Route::get('/record', function () {
+    return view('record');
+});
+
+Route::get('/analytics', function () {
+    return view('analytics');
+});
+
+Route::get('/offers', function () {
+    return view('offers');
+});
+
+Route::get('/employees', function () {
+    return view('employees');
+});
+
+Route::get('/customers', function () {
+    return view('customers');
+});
+
+Route::get('/settings', function () {
+    return view('settings');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

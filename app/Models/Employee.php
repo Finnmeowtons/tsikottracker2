@@ -13,7 +13,6 @@ class Employee extends Model
         'name',
         'contact_details',
         'position',
-        'salary',
         'company_id',
     ];
 

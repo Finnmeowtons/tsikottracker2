@@ -19,9 +19,9 @@ class Company extends Model
         return $this->belongsTo(User::class, 'owner_id');
     }
 
-    public function serviceProducts()
+    public function offer()
     {
-        return $this->hasMany(ServiceProduct::class);
+        return $this->hasMany(Offer::class);
     }
 
     public function customers()
