@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\Employees;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -21,7 +22,7 @@ Route::get('/', function () {
 
 Route::get('/companydashboard', function () {
     return view('companydashboard');
-});
+})->middleware('auth');
 
 Route::get('/record', function () {
     return view('record');
@@ -53,9 +54,12 @@ Route::get('/customers', function () {
     return view('customers');
 });
 
+
 Route::get('/settings', function () {
     return view('settings');
 });
+
+Route::get('/settings', [CompanyController::class, 'get']); 
 
 Route::get('/dashboard', function () {
     return view('dashboard');

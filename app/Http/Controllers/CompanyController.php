@@ -8,6 +8,12 @@ use Illuminate\Validation\Rule;
 
 class CompanyController extends Controller
 {
+
+    public function get(){
+        $companies = Company::get();
+        return view('settings', compact('companies'));
+    }
+
     public function index(){
         $companies = Company::with('owner')->get();
         return response()->json($companies);
