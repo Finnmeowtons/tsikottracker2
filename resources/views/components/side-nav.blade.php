@@ -45,11 +45,9 @@
             margin-right: 8px;
         }
 
-        .nav-item{
+        .nav-item {
             width: 200px;
         }
-
-        
     </style>
 </head>
 
@@ -100,6 +98,14 @@
                 </li>
             </ul>
 
+            <div class="user-profile" style="display: none;">
+                <p class="username"></p>
+                <a href="/logout" class="btn btn-secondary">Logout</a>
+            </div>
+            <div class="login-area" style="display: none;">
+                <a href="/dashboard" class="btn btn-primary">Login</a>
+            </div>
+
         </div>
     </nav>
 
@@ -108,4 +114,30 @@
     integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
     crossorigin="anonymous"></script>
 
+    <script>
+    window.addEventListener('DOMContentLoaded', () => {
+        const userProfile = document.querySelector('.user-profile');
+        const username = userProfile.querySelector('.username');
+        const loginArea = document.querySelector('.login-area');
+
+        async function fetchUserData() {  // Using async/await for cleaner error handling 
+            try {
+                const response = await fetch('/api/user');
+                const data = await response.json();
+
+                if (response.ok) { // Check for success status code
+                    username.textContent = data.username; 
+                    userProfile.style.display = 'block';
+                } else {
+                    loginArea.style.display = 'block';
+                }            
+            } catch (error) {
+                console.error('Error fetching user:', error);
+                loginArea.style.display = 'block'; // Show login on error
+            }
+        }
+
+        fetchUserData(); // Call the function to start the process
+    });
+</script>
 </html>
