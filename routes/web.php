@@ -46,7 +46,9 @@ Route::get('/employees', function () {
 Route::get('/employees', [Employees::class, 'index']); 
 
 
-
+Route::get('/loglog', function () {
+    return view('login');
+});
 
 
 
