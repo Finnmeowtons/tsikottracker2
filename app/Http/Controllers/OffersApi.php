@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Offer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class OffersApi extends Controller
 {
@@ -25,6 +26,7 @@ class OffersApi extends Controller
         ]);
 
         $offer = Offer::create($validatedData);
+        Log::debug($request->all());
         return response()->json($offer, 201); // 201 Created status
     }
 
