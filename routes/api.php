@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\CustomersApi;
 use App\Http\Controllers\EmployeesApi;
 use App\Http\Controllers\OffersApi;
@@ -22,6 +23,9 @@ use App\Http\Controllers\CompanyController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('/login-retrofit', [AuthenticatedSessionController::class, 'loginRetrofit']);
+
 Route::apiResource('offers', OffersApi::class);
 
 Route::apiResource('records', RecordsApi::class);

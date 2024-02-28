@@ -32,6 +32,22 @@ class AuthenticatedSessionController extends Controller
         return redirect()->intended(RouteServiceProvider::HOME);
     }
 
+    public function loginRetrofit(LoginRequest $request)
+    {
+        if (Auth::attempt($request->only('email', 'password'))) {
+            // Successful login
+            return response()->json([
+                'message' => 'Login successful', 
+                // You may want to return a token or other user data if needed
+            ], 200); // Success status code
+        } else {
+            // Invalid credentials
+            return response()->json([
+                'error' => 'Invalid credentials' 
+            ], 401); // Unauthorized status code
+        }
+    }
+
     /**
      * Destroy an authenticated session.
      */
