@@ -26,7 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('auth:sanctum')->get('/user', [UserController::class, 'getAuthenticatedUser']); 
+// Route::middleware('auth:sanctum')->get('/user', [UserController::class, 'getAuthenticatedUser']); 
 
 Route::post('/login-retrofit', [AuthenticatedSessionController::class, 'loginRetrofit']);
 
