@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CustomersApi;
 use App\Http\Controllers\EmployeesApi;
@@ -31,6 +32,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/login-retrofit', [AuthenticatedSessionController::class, 'loginRetrofit']);
 
 Route::post('/register-retrofit', [RegisteredUserController::class, 'registerRetrofit']);
+
+Route::post('/forgotpassword-retrofit', [PasswordResetLinkController::class, 'sendPasswordResetLink']);
 
 Route::apiResource('offers', OffersApi::class);
 
