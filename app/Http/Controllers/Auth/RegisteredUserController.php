@@ -69,6 +69,6 @@ class RegisteredUserController extends Controller
     // Success even with potential validation errors (we handle them below)
     return response()->json([
         'message' => 'Registration details processed',  
-    ], 200); 
+    ], 201); 
 }
 }
