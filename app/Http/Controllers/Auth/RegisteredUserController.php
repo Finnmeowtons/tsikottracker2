@@ -66,9 +66,16 @@ class RegisteredUserController extends Controller
         'password' => Hash::make($request->password),
     ]);
 
+    $token = $user->createToken('authToken')->plainTextToken;
+
     // Success even with potential validation errors (we handle them below)
     return response()->json([
-        'message' => 'Registration details processed',  
+        'message' => 'Login successful',
+            'token' => $token,
+            'user' => [
+                'id' => $user->id,
+                'email' => $user->email
+            ] 
     ], 201); 
 }
 }
