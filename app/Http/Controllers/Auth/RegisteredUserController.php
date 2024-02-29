@@ -59,7 +59,7 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        try {
+  
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
@@ -71,11 +71,6 @@ class RegisteredUserController extends Controller
                 'message' => 'Registration successful' 
             ], 201); 
     
-        } catch (ValidationException $e) {
-            // Email uniqueness failed
-            return response()->json([
-                'error' => 'The email hass already been taken.' 
-            ], 200); // Unprocessable Entity status code
-        }
+       
     }
 }
