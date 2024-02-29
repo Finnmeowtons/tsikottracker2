@@ -43,11 +43,9 @@ class AuthenticatedSessionController extends Controller
         $token = $user->createToken('authToken')->plainTextToken;
         return response()->json([
             'message' => 'Login successful',
-            'token' => $token,
-            'user' => [
-                'id' => $user->id,
-                'email' => $user->email
-            ] 
+            'token' => $token, 
+            'email' => $user->email,
+            'userId' => $user->id,
         ], 200); 
     } else {
         // Invalid credentials (or user not found)
