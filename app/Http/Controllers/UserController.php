@@ -36,17 +36,10 @@ class UserController extends Controller
 
      $user = User::find($userId);  
 
-     if (!$user) {
-         return response()->json([
-             'error' => 'User not found'
-         ], 404); // Not Found
-     }
+     $companies = $user->companies()->with(['offer', 'customers'])->get();  
 
-     // Fetch companies with optimized eager loading
-     $companies = $user->companies()->with(['offer', 'customers'])->get(); 
-
-     return response()->json([
-         'companies' => $companies
-     ], 200);
+    return response()->json([
+        'companies' => $companies
+    ], 200);
  }
 }
