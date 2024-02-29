@@ -26,7 +26,10 @@ class CompanyController extends Controller
         ]);
 
         $company = Company::create($validatedData);
-        return response()->json($company, 201); // 201 Created status
+        return response()->json([
+            'company' => $company,
+            'invitation_code' => $company->invitation_code
+        ], 201);
     }
 
     public function show(Company $company){

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Company extends Model
 {
@@ -12,7 +13,17 @@ class Company extends Model
     protected $fillable = [
         'name',
         'owner_id',
+        'invitation_code'
     ];
+
+    protected static function boot()
+{
+    parent::boot();
+
+    static::creating(function ($company) {
+        $company->invitation_code = Str::random(12); // Generate the code when a company is created 
+    });
+}
 
     public function owner()
     {

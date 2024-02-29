@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->unsignedBigInteger('owner_id')->nullable();
+            $table->string('invitation_code', 12)->nullable()->unique();
             $table->foreign('owner_id')->references('id')->on('users')->onDelete('set null');
             $table->timestamps();
         });
