@@ -75,7 +75,7 @@ class RegisteredUserController extends Controller
             // Email uniqueness failed
             return response()->json([
                 'error' => 'The email has already been taken.' 
-            ], 422); // Unprocessable Entity status code
+            ], 200); // Unprocessable Entity status code
         }
     }
 }
