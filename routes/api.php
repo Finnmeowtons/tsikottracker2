@@ -35,6 +35,9 @@ Route::post('/register-retrofit', [RegisteredUserController::class, 'registerRet
 
 Route::post('/forgotpassword-retrofit', [PasswordResetLinkController::class, 'sendPasswordResetLink']);
 
+Route::get('/user/{userId}/companies', [UserController::class, 'getUserCompanies']);
+
+
 Route::apiResource('offers', OffersApi::class);
 
 Route::apiResource('records', RecordsApi::class);
