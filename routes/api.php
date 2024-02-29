@@ -7,6 +7,7 @@ use App\Http\Controllers\CustomersApi;
 use App\Http\Controllers\EmployeesApi;
 use App\Http\Controllers\OffersApi;
 use App\Http\Controllers\RecordsApi;
+use App\Http\Controllers\UserCompanyRelationshipController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -47,4 +48,6 @@ Route::apiResource('companies', CompanyController::class);
 Route::apiResource('employees', EmployeesApi::class);
 
 Route::apiResource('customers', CustomersApi::class);
+
+Route::apiResource('relationship', UserCompanyRelationshipController::class);
 
