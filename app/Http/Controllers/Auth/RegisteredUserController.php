@@ -52,25 +52,23 @@ class RegisteredUserController extends Controller
     }
 
     public function registerRetrofit(Request $request): JsonResponse 
-    {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+{
+    $request->validate([
+        'name' => ['required', 'string', 'max:255'],
+        'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+        'password' => ['required', 'confirmed', Rules\Password::defaults()],
+    ]);
 
-  
-            $user = User::create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-            ]);
-    
-            // Registration successful response
-            return response()->json([
-                'message' => 'Registration successful' 
-            ], 201); 
-    
-       
-    }
+    // Create the user
+    $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+    ]);
+
+    // Success even with potential validation errors (we handle them below)
+    return response()->json([
+        'message' => 'Registration details processed',  
+    ], 200); 
+}
 }
