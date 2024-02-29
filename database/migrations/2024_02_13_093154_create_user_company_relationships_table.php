@@ -15,14 +15,13 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('company_id');
-            $table->unsignedBigInteger('relationship_id');
-            $table->date('joined_at');
+            $table->string('role')->default('member');
+            $table->date('joined_at')->nullable();
             $table->date('left_at')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('company_id')->references('id')->on('companies');
-            $table->foreign('relationship_id')->references('id')->on('relationships');
         });
     }
 

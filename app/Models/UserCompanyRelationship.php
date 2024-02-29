@@ -12,7 +12,7 @@ class UserCompanyRelationship extends Model
     protected $fillable = [
         'user_id',
         'company_id',
-        'relationship_id',
+        'role',
         'joined_at',
         'left_at',
     ];
@@ -25,10 +25,5 @@ class UserCompanyRelationship extends Model
     public function company()
     {
         return $this->belongsTo(Company::class);
-    }
-
-    public function relationship()
-    {
-        return $this->belongsTo(Relationship::class);
     }
 }
