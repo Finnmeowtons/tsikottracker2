@@ -38,6 +38,8 @@ Route::post('/forgotpassword-retrofit', [PasswordResetLinkController::class, 'se
 
 Route::get('/user/{userId}/companies', [UserController::class, 'getUserCompanies']);
 
+Route::get('/userss', [UserController::class, 'getAllUsers']);
+
 
 Route::apiResource('offers', OffersApi::class);
 

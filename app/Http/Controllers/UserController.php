@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    public function getAllUsers(): JsonResponse
+    {
+        $users = User::all();
+        return response()->json($users);  
+    }
+
     public function getAuthenticatedUser(Request $request): JsonResponse
     {
         $user = Auth::user();
