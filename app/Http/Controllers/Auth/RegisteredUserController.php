@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
@@ -58,15 +59,23 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        // Registration successful response
-        return response()->json([
-            'message' => 'Registration successful' 
-        ], 201); 
+        try {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+    
+            // Registration successful response
+            return response()->json([
+                'message' => 'Registration successful' 
+            ], 201); 
+    
+        } catch (ValidationException $e) {
+            // Email uniqueness failed
+            return response()->json([
+                'error' => 'The email has already been taken.' 
+            ], 422); // Unprocessable Entity status code
+        }
     }
 }
