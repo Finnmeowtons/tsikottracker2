@@ -72,7 +72,7 @@ class RegisteredUserController extends Controller
     return response()->json([
         'message' => 'Login successful',
             'token' => $token,
-            'id' => $user->id,
+            'userId' => $user->id,
             'email' => $user->email
     ], 201); 
 }
