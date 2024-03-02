@@ -28,7 +28,8 @@ class CompanyController extends Controller
         $company = Company::create($validatedData);
         return response()->json([
             'company' => $company,
-            'invitation_code' => $company->invitation_code
+            'invitation_code' => $company->invitation_code,
+            'id' => $company->id
         ], 201);
     }
 
