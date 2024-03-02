@@ -20,7 +20,7 @@ class CompanyController extends Controller
     }
 
     public function getOwnCompany(Request $request, $id){
-        $company = Company::where('id', $id)->first();
+        $company = Company::where('owner_id', $id)->first();
 
         if ($company) {
             return response()->json($company); 
