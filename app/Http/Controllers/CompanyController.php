@@ -23,7 +23,12 @@ class CompanyController extends Controller
         $company = Company::where('owner_id', $id)->get();
 
         if ($company) {
-            return response()->json($company); 
+            return response()->json([
+                'id' => $company->id,
+                'name' => $company->name,
+                'owner_id' => $company->owner_id,
+                'invitation_code' => $company->invitation_code
+            ]); 
         }
     }
 
