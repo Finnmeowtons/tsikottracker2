@@ -20,16 +20,12 @@ class CompanyController extends Controller
     }
 
     public function getOwnCompany(Request $request, $id){
-        $company = Company::where('owner_id', $id)->get();
+        $companies = Company::where('owner_id', $id)
+                  ->select('id', 'name', 'owner_id', 'invitation_code') // Select specific fields
+                  ->get();
 
-        if ($company) {
-            return response()->json([
-                'id' => $company->id,
-                'name' => $company->name,
-                'owner_id' => $company->owner_id,
-                'invitation_code' => $company->invitation_code
-            ]); 
-        }
+        return response()->json($companies); 
+        
     }
 
     public function store(Request $request){
