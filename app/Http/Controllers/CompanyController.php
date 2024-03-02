@@ -24,8 +24,6 @@ class CompanyController extends Controller
 
         if ($company) {
             return response()->json($company); 
-        } else {
-            return response()->json(['message' => 'Company not found'], 404); // Not Found 
         }
     }
 
