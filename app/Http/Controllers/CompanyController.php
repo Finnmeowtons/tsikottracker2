@@ -19,6 +19,16 @@ class CompanyController extends Controller
         return response()->json($companies);
     }
 
+    public function getOwnCompany(Request $request, $id){
+        $company = Company::where('id', $id)->first();
+
+        if ($company) {
+            return response()->json($company); 
+        } else {
+            return response()->json(['message' => 'Company not found'], 404); // Not Found 
+        }
+    }
+
     public function store(Request $request){
         $validatedData = $request->validate([
             'name' => 'required|unique:companies|max:255',
