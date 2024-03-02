@@ -16,6 +16,8 @@ class Company extends Model
         'invitation_code'
     ];
 
+    protected $hidden = ['created_at', 'updated_at'];
+    
     protected static function boot()
 {
     parent::boot();
