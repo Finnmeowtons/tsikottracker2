@@ -17,7 +17,7 @@ class OffersApi extends Controller
 
     public function getOwnOffer(Request $request, $id){
         $offers = Offer::where('company_id', $id)
-                  ->select('id', 'name', 'price', 'type') // Select specific fields
+                  ->select('id', 'name', 'price', 'type')
                   ->get();
 
         return response()->json($offers); 

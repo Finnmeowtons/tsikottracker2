@@ -31,28 +31,26 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Route::middleware('auth:sanctum')->get('/user', [UserController::class, 'getAuthenticatedUser']); 
 
 Route::post('/login-retrofit', [AuthenticatedSessionController::class, 'loginRetrofit']);
-
 Route::post('/register-retrofit', [RegisteredUserController::class, 'registerRetrofit']);
-
 Route::post('/forgotpassword-retrofit', [PasswordResetLinkController::class, 'sendPasswordResetLink']);
 
 Route::get('/user/{userId}/companies', [UserController::class, 'getUserCompanies']);
-
 Route::get('/userss', [UserController::class, 'getAllUsers']);
 
-Route::get('companies/user/{id}', [CompanyController::class, 'getOwnCompany']);
 
-Route::get('offers/user/{id}', [OffersApi::class, 'getOwnOffer']);
 
 Route::apiResource('offers', OffersApi::class);
+Route::get('offers/user/{id}', [OffersApi::class, 'getOwnOffer']);
 
 Route::apiResource('records', RecordsApi::class);
 
 Route::apiResource('companies', CompanyController::class);
+Route::get('companies/user/{id}', [CompanyController::class, 'getOwnCompany']);
 
 Route::apiResource('employees', EmployeesApi::class);
 
 Route::apiResource('customers', CustomersApi::class);
+Route::get('customers/user/{id}', [CustomersApi::class, 'getOwnCustomer']);
 
 Route::apiResource('relationship', UserCompanyRelationshipController::class);
 
