@@ -35,7 +35,7 @@ class EmployeesApi extends Controller
         ]);
 
         $employee = Employee::create($validatedData);
-        return response()->json($employee, 201); // 201 Created status
+        return response()->json($employee);
     }
 
     
