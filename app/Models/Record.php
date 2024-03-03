@@ -26,7 +26,7 @@ class Record extends Model
 
     public function offer()
     {
-        return $this->belongsTo(Offer::class);
+        return $this->belongsTo(Offer::class, 'service_product_id');
     }
 
     public function company()

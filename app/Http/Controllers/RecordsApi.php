@@ -17,7 +17,7 @@ class RecordsApi extends Controller
     {
         $validatedData = $request->validate([
             'customer_id' => 'nullable|exists:customers,id',
-            'offer_id' => 'required|exists:offers,id', 
+            'service_product_id' => 'required|exists:offers,id', 
             'price' => 'nullable|numeric|min:0', 
             'date' => 'date_format:Y-m-d h:i:s|nullable',
             'company_id' => 'required|exists:companies,id',
