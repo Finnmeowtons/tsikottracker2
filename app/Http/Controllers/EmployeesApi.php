@@ -16,6 +16,13 @@ class EmployeesApi extends Controller
         return response()->json($employees); 
     }
 
+    public function getOwnEmployee(Request $request, $id){
+        $offers = Employee::where('company_id', $id)
+                  ->select('id', 'name', 'contact_details', 'position')
+                  ->get();
+
+        return response()->json($offers); 
+    }
 
     
     public function store(Request $request)

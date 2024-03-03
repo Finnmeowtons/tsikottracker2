@@ -21,7 +21,6 @@ class OffersApi extends Controller
                   ->get();
 
         return response()->json($offers); 
-        
     }
 
 

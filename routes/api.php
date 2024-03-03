@@ -48,6 +48,7 @@ Route::apiResource('companies', CompanyController::class);
 Route::get('companies/user/{id}', [CompanyController::class, 'getOwnCompany']);
 
 Route::apiResource('employees', EmployeesApi::class);
+Route::get('employees/user/{id}', [EmployeesApi::class, 'getOwnEmployee']);
 
 Route::apiResource('customers', CustomersApi::class);
 Route::get('customers/user/{id}', [CustomersApi::class, 'getOwnCustomer']);
