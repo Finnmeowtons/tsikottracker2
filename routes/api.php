@@ -40,7 +40,9 @@ Route::get('/user/{userId}/companies', [UserController::class, 'getUserCompanies
 
 Route::get('/userss', [UserController::class, 'getAllUsers']);
 
-Route::get('companiess/{id}', [CompanyController::class, 'getOwnCompany']);
+Route::get('companies/user/{id}', [OffersApi::class, 'getOwnOffer']);
+
+Route::get('offers/user/{id}', [CompanyController::class, 'getOwnCompany']);
 
 Route::apiResource('offers', OffersApi::class);
 

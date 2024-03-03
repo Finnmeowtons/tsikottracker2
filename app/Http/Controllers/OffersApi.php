@@ -15,6 +15,15 @@ class OffersApi extends Controller
         return response()->json($offers);
     }
 
+    public function getOwnOffer(Request $request, $id){
+        $offers = Offer::where('company_id', $id)
+                  ->select('id', 'name', 'price', 'type') // Select specific fields
+                  ->get();
+
+        return response()->json($offers); 
+        
+    }
+
 
     public function store(Request $request)
     {
