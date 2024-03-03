@@ -26,6 +26,9 @@ class RecordsApi extends Controller
         ]);
 
         $record = Record::create($validatedData);
+
+        $record->load('offer', 'company', 'employee', 'customer');
+
         return response()->json($record, 201); // 201 Created status
     }
 
