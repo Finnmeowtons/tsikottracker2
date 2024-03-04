@@ -15,7 +15,7 @@ class RecordsApi extends Controller
 
     public function getOwnRecord(Request $request, $id){
         $records = Record::where('company_id', $id)
-        ->select('id', 'name', 'price', 'type', 'customer_id', 'service_product_id', 'company_id', 'employee_id') // Select only necessary columns
+        ->select('id', 'price', 'type', 'customer_id', 'service_product_id', 'company_id', 'employee_id') // Select only necessary columns
         ->with(['customer' => function ($query) { 
                 $query->select('name', 'car_plate_number'); // Select desired customer fields
             },
