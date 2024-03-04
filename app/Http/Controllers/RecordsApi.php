@@ -53,8 +53,8 @@ class RecordsApi extends Controller
             'offer_price' => 'required',
             'type' => 'required',
             'notes' => 'nullable',
-            'employee_name' => 'required|max:255',
-            'employee_position' => 'required|max:255'
+            'employee_name' => 'nullable|max:255',
+            'employee_position' => 'nullable|max:255'
         ]);
 
         $customer = Customer::firstOrCreate(['name' => $request->customer_name]);
