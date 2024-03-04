@@ -34,7 +34,6 @@ class OffersApi extends Controller
         ]);
 
         $offer = Offer::create($validatedData);
-        Log::debug($request->all());
         return response()->json($offer->load('company'));
     }
 

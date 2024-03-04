@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
+use App\Models\Employee;
+use App\Models\Offer;
 use App\Models\Record;
 use Illuminate\Http\Request;
 
@@ -32,6 +35,7 @@ class RecordsApi extends Controller
             'notes' => $record->notes,
             'employee_id' => $record->employee_id,
             'employee_name' => $record->employee->name,
+            'employee_position' => $record->employee->position,
             'id' => $record->id,
             'time' => $record->created_at
         ];
@@ -39,6 +43,33 @@ class RecordsApi extends Controller
 
     return response()->json($formattedRecords);
 }
+
+    public function storeRetrofit(Request $request)
+    {
+        $validatedData = $request->validate([
+            'customer_name' => 'nullable',
+            'customer_car_plate_number' => 'required',
+            'offer' => 'required|max:255',
+            'offer_price' => 'required',
+            'type' => 'required',
+            'notes' => 'nullable',
+            'employee_name' => 'required|max:255',
+            'employee_position' => 'required|max:255'
+        ]);
+
+        $customer = Customer::firstOrCreate(['name' => $request->customer_name]);
+        $offer = Offer::firstOrCreate(['name' => $request->offer]); 
+        $employee = Employee::firstOrCreate(['name' => $request->employee_name]);
+
+        $validatedData['customer_id'] = $customer->id;
+        $validatedData['service_product_id'] = $offer->id;
+        $validatedData['employee_id'] = $employee->id;
+
+        $record = Record::create($validatedData);
+
+        return response()->json($record);
+
+    }
 
     public function store(Request $request)
     {
