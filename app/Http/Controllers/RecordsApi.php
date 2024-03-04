@@ -13,22 +13,29 @@ class RecordsApi extends Controller
         return response()->json($records);
     }
 
-    public function getOwnRecord(Request $request, $id){
-        $records = Record::where('company_id', $id)
-        ->select('id', 'price', 'customer_id', 'service_product_id', 'company_id', 'employee_id') // Select only necessary columns
-        ->with(['customer' => function ($query) { 
-                $query->select('name', 'car_plate_number'); // Select desired customer fields
-            },
-            'offer' => function ($query) { 
-                $query->select('name', 'price', 'type'); // Select desired offer fields
-            },
-            'employee' => function ($query) { 
-                $query->select('name'); // Select desired employee fields
-            }])
+    public function getOwnRecord(Request $request, $id)
+{
+    $records = Record::where('company_id', $id)
+        ->with(['customer', 'offer', 'employee'])
         ->get();
 
-    return response()->json($records); 
-    }
+    $formattedRecords = $records->map(function ($record) {
+        return [
+            'customer_name' => $record->customer->name,
+            'customer_car_plate_number' => $record->customer->car_plate_number,
+            'offer_name' => $record->offer->name,
+            'offer_price' => $record->offer->price,
+            'offer_type' => $record->offer->type,
+            'date' => $record->date,
+            'company_id' => $record->company_id,
+            'notes' => $record->notes,
+            'employee_name' => $record->employee->name,
+            'record_id' => $record->id 
+        ];
+    });
+
+    return response()->json($formattedRecords);
+}
 
     public function store(Request $request)
     {
