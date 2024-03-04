@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('customer_id')->nullable();
             $table->unsignedBigInteger('service_product_id');
-            $table->decimal('price', 8, 2)->nullable();
+            $table->integer('price');
             $table->date('date')->nullable();
             $table->unsignedBigInteger('company_id');
             $table->text('notes')->nullable();
