@@ -52,7 +52,7 @@ class RecordsApi extends Controller
                 'customer_name' => 'nullable',
                 'customer_car_plate_number' => 'required',
                 'offer' => 'required|max:255',
-                'offer_price' => 'required',
+                'price' => 'required',
                 'type' => 'required',
                 'notes' => 'nullable',
                 'employee_name' => 'nullable|max:255',
@@ -69,7 +69,7 @@ class RecordsApi extends Controller
 
             $offer = Offer::firstOrCreate([
                 'name' => $request->offer,
-                'price' => $request->offer_price,
+                'price' => $request->price,
                 'type' => $request->type,
                 'company_id' => $request->company_id
             ]);
