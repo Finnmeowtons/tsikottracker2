@@ -32,7 +32,8 @@ class RecordsApi extends Controller
             'notes' => $record->notes,
             'employee_id' => $record->employee_id,
             'employee_name' => $record->employee->name,
-            'id' => $record->id 
+            'id' => $record->id,
+            'time' => $record->created_at
         ];
     });
 
