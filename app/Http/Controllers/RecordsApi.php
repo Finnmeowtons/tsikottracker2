@@ -60,9 +60,25 @@ class RecordsApi extends Controller
                 'company_id' => 'required'
             ]);
 
-            $customer = Customer::firstOrCreate(['name' => $request->customer_name]);
-            $offer = Offer::firstOrCreate(['name' => $request->offer]);
-            $employee = Employee::firstOrCreate(['name' => $request->employee_name]);
+            $customer = Customer::firstOrCreate([
+                'name' => $request->customer_name,
+                'car_plate_number' => $request->customer_car_plate_number,
+                'company_id' => $request->company_id
+
+            ]);
+
+            $offer = Offer::firstOrCreate([
+                'name' => $request->offer,
+                'price' => $request->offer_price,
+                'type' => $request->type,
+                'company_id' => $request->company_id
+            ]);
+
+            $employee = Employee::firstOrCreate([
+                'name' => $request->employee_name,
+                'position' => $request->employee_position,
+                'company_id' => $request->company_id
+            ]);
 
             $validatedData['customer_id'] = $customer->id;
             $validatedData['service_product_id'] = $offer->id;
