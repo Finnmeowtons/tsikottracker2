@@ -13,6 +13,23 @@ class RecordsApi extends Controller
         return response()->json($records);
     }
 
+    public function getOwnRecord(Request $request, $id){
+        $records = Record::where('company_id', $id)
+        ->select('id', 'name', 'price', 'type', 'customer_id', 'service_product_id', 'company_id', 'employee_id') // Select only necessary columns
+        ->with(['customer' => function ($query) { 
+                $query->select('name', 'car_plate_number'); // Select desired customer fields
+            },
+            'offer' => function ($query) { 
+                $query->select('name', 'price'); // Select desired offer fields
+            },
+            'employee' => function ($query) { 
+                $query->select('name'); // Select desired employee fields
+            }])
+        ->get();
+
+    return response()->json($records); 
+    }
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([

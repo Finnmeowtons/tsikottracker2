@@ -43,6 +43,7 @@ Route::apiResource('offers', OffersApi::class);
 Route::get('offers/user/{id}', [OffersApi::class, 'getOwnOffer']);
 
 Route::apiResource('records', RecordsApi::class);
+Route::get('records/user/{id}', [RecordsApi::class, 'getOwnRecord']);
 
 Route::apiResource('companies', CompanyController::class);
 Route::get('companies/user/{id}', [CompanyController::class, 'getOwnCompany']);
