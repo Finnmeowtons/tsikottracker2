@@ -23,14 +23,16 @@ class RecordsApi extends Controller
         return [
             'customer_name' => $record->customer->name,
             'customer_car_plate_number' => $record->customer->car_plate_number,
-            'offer_name' => $record->offer->name,
+            'offer_id' => $record->offer_id,
+            'offer' => $record->offer->name,
             'offer_price' => $record->offer->price,
-            'offer_type' => $record->offer->type,
+            'type' => $record->offer->type,
             'date' => $record->date,
             'company_id' => $record->company_id,
             'notes' => $record->notes,
+            'employee_id' => $record->employee_id,
             'employee_name' => $record->employee->name,
-            'record_id' => $record->id 
+            'id' => $record->id 
         ];
     });
 
