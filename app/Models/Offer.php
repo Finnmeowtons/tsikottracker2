@@ -23,7 +23,7 @@ class Offer extends Model
 
     public function record()
     {
-        return $this->belongsTo(Record::class);
+        return $this->belongsToMany(Record::class);
     }
 
     public function records()
