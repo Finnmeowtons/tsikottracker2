@@ -20,7 +20,7 @@ class RecordsApi extends Controller
     public function getOwnRecord(Request $request, $id)
     {
         $records = Record::where('company_id', $id)
-            ->with(['customer', 'offer', 'employee'])
+            ->with(['customer', 'offers', 'employee'])
             ->get();
 
         $formattedRecords = $records->map(function ($record) {
