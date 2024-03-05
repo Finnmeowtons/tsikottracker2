@@ -65,27 +65,6 @@ class RecordsApi extends Controller
 
             ]);
 
-            $offersData = $request->get('offers');
-            foreach ($offersData as $offerData) {
-                // Retire old offer if it exists and the price differs
-                $existingOffer = Offer::where([
-                    'name' => $offerData['name'],
-                    'company_id' => $request->company_id,
-                ])->first();
-
-                if ($existingOffer && $existingOffer->price != $offerData['price']) {
-                    $existingOffer->company_id = null;
-                    $existingOffer->save();
-                }
-
-                // Create new offer
-                $offer = Offer::create([
-                    'name' => $offerData['name'],
-                    'price' => $offerData['price'],
-                    'type' => $offerData['type'],
-                    'company_id' => $request->company_id
-                ]);
-            }
 
             $employee = Employee::firstOrCreate([
                 'name' => $request->employee_name,
@@ -94,10 +73,46 @@ class RecordsApi extends Controller
             ]);
 
             $validatedData['customer_id'] = $customer->id;
-            $validatedData['service_product_id'] = $offer->id;
             $validatedData['employee_id'] = $employee->id;
 
             $record = Record::create($validatedData);
+
+            $offersData = $request->get('offers');
+            foreach ($offersData as $offerData) {
+                // Attempt to find an existing offer with matching price
+                $existingOffer = Offer::where([
+                    'name' => $offerData['name'],
+                    'type' => $offerData['type'],
+                    'price' => $offerData['price'],
+                    'company_id' => $request->company_id,
+                ])->first();
+
+                if ($existingOffer) {
+                    $offer = $existingOffer; // Reuse the existing offer
+                } else {
+                    // Check for existing offer (same name, type, different price)
+                    $oldOfferToRetire = Offer::where([
+                        'name' => $offerData['name'],
+                        'type' => $offerData['type'],
+                        'company_id' => $request->company_id,
+                    ])->where('price', '!=', $offerData['price'])->first(); // Different price
+        
+                    if ($oldOfferToRetire) {
+                        $oldOfferToRetire->company_id = null;
+                        $oldOfferToRetire->save();
+                    }
+        
+                    // Create a new offer
+                    $offer = Offer::create([
+                        'name' => $offerData['name'],
+                        'price' => $offerData['price'],
+                        'type' => $offerData['type'],
+                        'company_id' => $request->company_id
+                    ]);
+                }
+
+                $record->offers()->attach($offer->id); // Attach (new or existing)
+            }
 
             return response()->json($record, 201);
 
@@ -113,7 +128,6 @@ class RecordsApi extends Controller
         $validatedData = $request->validate([
             'customer_id' => 'nullable|exists:customers,id',
             'service_product_id' => 'required|exists:offers,id',
-            'price' => 'nullable|numeric|min:0',
             'date' => 'date_format:Y-m-d h:i:s|nullable',
             'company_id' => 'required|exists:companies,id',
             'notes' => 'nullable',
