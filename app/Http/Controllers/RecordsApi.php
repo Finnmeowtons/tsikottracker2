@@ -24,21 +24,25 @@ class RecordsApi extends Controller
             ->get();
 
         $formattedRecords = $records->map(function ($record) {
+            $offersData = $record->offers->map(function ($offer) { // Iterate offers
+                return [
+                    'offer_id' => $offer->id,
+                    'offer' => $offer->name,
+                    'offer_price' => $offer->price,
+                    'type' => $offer->type
+                ];
+            });
             return [
                 'customer_name' => $record->customer->name,
                 'customer_car_plate_number' => $record->customer->car_plate_number,
-                'offer_id' => $record->offer->id,
-                'offer' => $record->offer->name,
-                'offer_price' => $record->offer->price,
-                'type' => $record->offer->type,
-                'date' => $record->date,
                 'company_id' => $record->company_id,
                 'notes' => $record->notes,
                 'employee_id' => $record->employee_id,
                 'employee_name' => $record->employee->name,
                 'employee_position' => $record->employee->position,
                 'id' => $record->id,
-                'time' => $record->created_at
+                'time' => $record->created_at,
+                'offers' => $offersData
             ];
         });
 
