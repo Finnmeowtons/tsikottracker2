@@ -14,16 +14,13 @@ return new class extends Migration
         Schema::create('records', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('customer_id')->nullable();
-            $table->integer('price');
-            $table->date('date')->nullable();
             $table->unsignedBigInteger('company_id');
+            $table->unsignedBigInteger('employee_id')->nullable();
             $table->text('notes')->nullable();
             $table->timestamps();
 
             $table->foreign('customer_id')->references('id')->on('customers');
             $table->foreign('company_id')->references('id')->on('companies');
-
-            $table->unsignedBigInteger('employee_id')->nullable();
             $table->foreign('employee_id')->references('id')->on('employees');
         
         });
