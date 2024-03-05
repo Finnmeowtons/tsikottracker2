@@ -22,7 +22,7 @@ class Record extends Model
         return $this->belongsTo(Customer::class);
     }
 
-    public function offer()
+    public function offers()
     {
         return $this->belongsToMany(Offer::class, 'record_offer');
     }
