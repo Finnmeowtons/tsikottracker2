@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->integer('price');
             $table->enum('type', ['service', 'product']);
-            $table->unsignedBigInteger('company_id');
+            $table->unsignedBigInteger('company_id')->nullable();
             $table->timestamps();
 
             $table->foreign('company_id')->references('id')->on('companies');
