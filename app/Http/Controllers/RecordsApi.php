@@ -52,7 +52,6 @@ class RecordsApi extends Controller
                 'customer_name' => 'nullable',
                 'customer_car_plate_number' => 'required',
                 'offer' => 'required|max:255',
-                'price' => 'required',
                 'type' => 'required',
                 'notes' => 'nullable',
                 'employee_name' => 'nullable|max:255',
@@ -67,12 +66,27 @@ class RecordsApi extends Controller
 
             ]);
 
-            $offer = Offer::firstOrCreate([
-                'name' => $request->offer,
-                'price' => $request->price,
-                'type' => $request->type,
-                'company_id' => $request->company_id
-            ]);
+            $offersData = $request->get('offers');
+            foreach ($offersData as $offerData) {
+                // Retire old offer if it exists and the price differs
+                $existingOffer = Offer::where([
+                    'name' => $offerData['name'],
+                    'company_id' => $request->company_id,
+                ])->first();
+
+                if ($existingOffer && $existingOffer->price != $offerData['price']) {
+                    $existingOffer->company_id = null;
+                    $existingOffer->save();
+                }
+
+                // Create new offer
+                $offer = Offer::create([
+                    'name' => $offerData['name'],
+                    'price' => $offerData['price'],
+                    'type' => $offerData['type'],
+                    'company_id' => $request->company_id
+                ]);
+            }
 
             $employee = Employee::firstOrCreate([
                 'name' => $request->employee_name,
@@ -90,8 +104,8 @@ class RecordsApi extends Controller
 
         } catch (ValidationException $e) {
             return response()->json([
-                'errors' => $e->validator->getMessageBag() // Nice error format 
-            ], 422); // Status code for Unprocessable Entity 
+                'errors' => $e->validator->getMessageBag()
+            ], 422);
         }
     }
 
