@@ -11,7 +11,6 @@ class Record extends Model
 
     protected $fillable = [
         'customer_id',
-        'service_product_id',
         'date',
         'company_id',
         'notes',
@@ -25,7 +24,7 @@ class Record extends Model
 
     public function offer()
     {
-        return $this->belongsToMany(Offer::class, 'service_product_id');
+        return $this->belongsToMany(Offer::class, 'record_offer');
     }
 
     public function company()
