@@ -70,14 +70,29 @@ class RecordsApi extends Controller
             ]);
 
 
-            if ($request->has('employee_name') && $request->has('employee_position')) {
-            $employee = Employee::firstOrCreate([
-                'name' => $request->employee_name,
-                'position' => $request->employee_position,
-                'company_id' => $request->company_id
-            ]);
-            $validatedData['employee_id'] = $employee->id;  
-        }
+            if (
+                $request->has('employee_name') && $request->has('employee_position') &&
+                !empty($request->employee_name) && !empty($request->employee_position)
+            ) {
+
+                // First, attempt to find an existing employee
+                $employee = Employee::where([
+                    'name' => $request->employee_name,
+                    'position' => $request->employee_position,
+                    'company_id' => $request->company_id,
+                ])->first();
+
+                // If an existing employee isn't found, create a new one
+                if (!$employee) {
+                    $employee = Employee::create([
+                        'name' => $request->employee_name,
+                        'position' => $request->employee_position,
+                        'company_id' => $request->company_id
+                    ]);
+                }
+
+                $validatedData['employee_id'] = $employee->id;
+            }
 
             $validatedData['customer_id'] = $customer->id;
 
@@ -102,12 +117,12 @@ class RecordsApi extends Controller
                         'type' => $offerData['type'],
                         'company_id' => $request->company_id,
                     ])->where('price', '!=', $offerData['price'])->first(); // Different price
-        
+
                     if ($oldOfferToRetire) {
                         $oldOfferToRetire->company_id = null;
                         $oldOfferToRetire->save();
                     }
-        
+
                     // Create a new offer
                     $offer = Offer::create([
                         'name' => $offerData['name'],
