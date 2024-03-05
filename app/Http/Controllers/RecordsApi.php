@@ -51,7 +51,6 @@ class RecordsApi extends Controller
             $validatedData = $request->validate([
                 'customer_name' => 'nullable',
                 'customer_car_plate_number' => 'required',
-                'offer' => 'required|max:255',
                 'type' => 'required',
                 'notes' => 'nullable',
                 'employee_name' => 'nullable|max:255',
