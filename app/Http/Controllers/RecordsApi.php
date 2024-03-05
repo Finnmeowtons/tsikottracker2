@@ -70,14 +70,16 @@ class RecordsApi extends Controller
             ]);
 
 
+            if ($request->has('employee_name') && $request->has('employee_position')) {
             $employee = Employee::firstOrCreate([
                 'name' => $request->employee_name,
                 'position' => $request->employee_position,
                 'company_id' => $request->company_id
             ]);
+            $validatedData['employee_id'] = $employee->id;  
+        }
 
             $validatedData['customer_id'] = $customer->id;
-            $validatedData['employee_id'] = $employee->id;
 
             $record = Record::create($validatedData);
 
