@@ -41,6 +41,7 @@ Route::get('/userss', [UserController::class, 'getAllUsers']);
 
 Route::apiResource('offers', OffersApi::class);
 Route::get('offers/user/{id}', [OffersApi::class, 'getOwnOffer']);
+Route::put('api/offers/android/delete/{id}', [OffersApi::class, 'deleteUpdateRetrofit']);
 
 Route::apiResource('records', RecordsApi::class);
 Route::get('records/user/{id}', [RecordsApi::class, 'getOwnRecord']);

@@ -48,12 +48,25 @@ class OffersApi extends Controller
         $validatedData = $request->validate([
             'name' => 'required|max:255',
             'price' => 'required',
-            'type' => 'required',
-            'company_id' => 'required|exists:companies,id',
+            'type' => 'required'
         ]);
 
         $offer->update($validatedData); 
         return response()->json($offer);    
+
+    }
+
+    public function deleteUpdateRetrofit(Request $request, $id)
+    {
+        $offer = Offer::find($id);
+        if (!$offer) {
+            return response()->json(['error' => 'Offer not found'], 404); 
+        }
+    
+        $offer->company_id = null;
+        $offer->save();
+    
+        return response()->json($offer);
 
     }
 
