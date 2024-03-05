@@ -29,7 +29,8 @@ class RecordsApi extends Controller
                     'offer_id' => $offer->id,
                     'offer' => $offer->name,
                     'offer_price' => $offer->price,
-                    'type' => $offer->type
+                    'type' => $offer->type,
+                    'company_id' => $offer->company_id
                 ];
             });
             return [
