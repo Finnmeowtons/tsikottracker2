@@ -39,8 +39,8 @@ class RecordsApi extends Controller
                 'company_id' => $record->company_id,
                 'notes' => $record->notes,
                 'employee_id' => $record->employee_id,
-                'employee_name' => $record->employee->name,
-                'employee_position' => $record->employee->position,
+                'employee_name' => $record->employee ? $record->employee->name : null,
+                'employee_position' => $record->employee ? $record->employee->position : null,
                 'id' => $record->id,
                 'time' => $record->created_at,
                 'offers' => $offersData
