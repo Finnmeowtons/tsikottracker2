@@ -12,7 +12,6 @@ class Record extends Model
     protected $fillable = [
         'customer_id',
         'service_product_id',
-        'price',
         'date',
         'company_id',
         'notes',
