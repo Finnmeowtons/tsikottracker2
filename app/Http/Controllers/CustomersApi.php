@@ -51,9 +51,8 @@ class CustomersApi extends Controller
         }
 
         $validatedData = $request->validate([
-            'name' => 'required|max:255',
-            'position' => 'required',
-            'contact_details' => 'nullable',
+            'car_plate_number' => 'required|max:255',
+            'name' => 'required',
             'company_id' => 'required|exists:companies,id',
         ]);
 
