@@ -73,9 +73,9 @@ class OffersApi extends Controller
             'company_id' => 'required|exists:companies,id',
         ]);
 
-        $newOffer  = Offer::create($validatedData);
+        $offer = Offer::create($validatedData);
     
-        return response()->json($newOffer);
+        return response()->json($offer);
 
     }
 
