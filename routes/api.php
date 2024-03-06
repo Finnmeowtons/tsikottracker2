@@ -49,6 +49,7 @@ Route::post('records/android', [RecordsApi::class, 'storeRetrofit']);
 
 Route::apiResource('companies', CompanyController::class);
 Route::get('companies/user/{id}', [CompanyController::class, 'getOwnCompany']);
+Route::delete('companies/user/{id}', [CompanyController::class, 'deleteUpdateRetrofit']);
 
 Route::apiResource('employees', EmployeesApi::class);
 Route::get('employees/user/{id}', [EmployeesApi::class, 'getOwnEmployee']);
