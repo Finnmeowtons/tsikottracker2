@@ -38,6 +38,33 @@ class EmployeesApi extends Controller
         return response()->json($employee);
     }
 
+    public function deleteUpdateRetrofit(Request $request, $id)
+    {
+        $employee = Employee::find($id);
+        if (!$employee) {
+            return response()->json(['error' => 'Offer not found'], 404); 
+        }
+
+        $employee->company_id = null;
+        $employee->save();
+
+        if ($request->company_id == null) {
+            return response()->json($employee);
+        }
+
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'position' => 'required',
+            'contact_details' => 'nullable',
+            'company_id' => 'required|exists:companies,id',
+        ]);
+
+        $newEmployee = Employee::create($validatedData);
+    
+        return response()->json($newEmployee);
+
+    }
+
     
     public function show(Employee $employee)
     {

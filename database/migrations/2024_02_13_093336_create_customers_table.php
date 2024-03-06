@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('car_plate_number');
             $table->string('name')->nullable();
-            $table->unsignedBigInteger('company_id');
+            $table->unsignedBigInteger('company_id')->nullable();
             $table->foreign('company_id')->references('id')->on('companies');
             $table->timestamps();
         });
