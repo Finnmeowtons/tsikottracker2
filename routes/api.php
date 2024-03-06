@@ -56,6 +56,7 @@ Route::post('employees/android/delete/{id}', [EmployeesApi::class, 'deleteUpdate
 
 Route::apiResource('customers', CustomersApi::class);
 Route::get('customers/user/{id}', [CustomersApi::class, 'getOwnCustomer']);
+Route::post('customers/android/delete/{id}', [CustomersApi::class, 'deleteUpdateRetrofit']);
 
 Route::apiResource('relationship', UserCompanyRelationshipController::class);
 

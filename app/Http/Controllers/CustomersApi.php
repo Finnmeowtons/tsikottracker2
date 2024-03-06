@@ -36,6 +36,33 @@ class CustomersApi extends Controller
         return response()->json($customer, 201); // 201 Created status
     }
 
+    public function deleteUpdateRetrofit(Request $request, $id)
+    {
+        $customer = Customer::find($id);
+        if (!$customer) {
+            return response()->json(['error' => 'Customer not found'], 404); 
+        }
+
+        $customer->company_id = null;
+        $customer->save();
+
+        if ($request->company_id == null) {
+            return response()->json($customer);
+        }
+
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
+            'position' => 'required',
+            'contact_details' => 'nullable',
+            'company_id' => 'required|exists:companies,id',
+        ]);
+
+        $newCustomer = Customer::create($validatedData);
+    
+        return response()->json($newCustomer);
+
+    }
+
 
     public function show(Customer $customer)
     {
