@@ -69,12 +69,12 @@ class CompanyController extends Controller
         $ownerId = $request->owner_id; 
 
         $company = Company::where('id', $id)
-                          ->where('user_id', $ownerId)
+                          ->where('owner_id', $ownerId)
                           ->firstOrFail(); 
     
         $company->delete();
     
-        $nextCompany = Company::where('user_id', $ownerId)->first(); // Replace if needed
+        $nextCompany = Company::where('owner_id', $ownerId)->first(); // Replace if needed
     
         if ($nextCompany) {
             return response()->json([ 
