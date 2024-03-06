@@ -64,4 +64,30 @@ class CompanyController extends Controller
         $company->delete();
         return response()->json([ 'message' => "Deleted" ]); 
     }
+
+    public function destroyRetrofit(Request $request, $id) {
+        $userId = $request->user_id; 
+
+        $company = Company::where('id', $id)
+                          ->where('user_id', $userId)
+                          ->firstOrFail(); 
+    
+        $company->delete();
+    
+        $nextCompany = Company::where('user_id', $userId)->first(); // Replace if needed
+    
+        if ($nextCompany) {
+            return response()->json([ 
+                'message' => 'Deleted',
+                'nextCompanyId' => $nextCompany->id,
+                'navigateToSetup' => false 
+        ]);
+        } else {
+            return response()->json([ 
+                'message' => 'Deleted',
+                'nextCompanyId' => null,
+                'navigateToSetup' => true
+        ]);
+        }
+    } 
 }
