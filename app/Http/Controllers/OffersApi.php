@@ -62,9 +62,13 @@ class OffersApi extends Controller
         if (!$offer) {
             return response()->json(['error' => 'Offer not found'], 404); 
         }
-    
+
         $offer->company_id = null;
         $offer->save();
+
+        if (!$request){
+            return response()->json($offer);
+        }
 
         $validatedData = $request->validate([
             'name' => 'required|max:255',
@@ -73,9 +77,9 @@ class OffersApi extends Controller
             'company_id' => 'required|exists:companies,id',
         ]);
 
-        $offer = Offer::create($validatedData);
+        $newOffer = Offer::create($validatedData);
     
-        return response()->json($offer);
+        return response()->json($newOffer);
 
     }
 
