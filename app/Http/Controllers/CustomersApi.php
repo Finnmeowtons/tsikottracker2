@@ -15,7 +15,7 @@ class CustomersApi extends Controller
 
     public function getOwnCustomer(Request $request, $id){
         $customers = Customer::where('company_id', $id)
-                  ->select('car_plate_number', 'name', 'company_id',)
+                  ->select('id', 'car_plate_number', 'name', 'company_id',)
                   ->get();
 
         return response()->json($customers); 
