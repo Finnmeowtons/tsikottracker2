@@ -66,15 +66,15 @@ class CompanyController extends Controller
     }
 
     public function destroyRetrofit(Request $request, $id) {
-        $userId = $request->user_id; 
+        $ownerId = $request->owner_id; 
 
         $company = Company::where('id', $id)
-                          ->where('user_id', $userId)
+                          ->where('user_id', $ownerId)
                           ->firstOrFail(); 
     
         $company->delete();
     
-        $nextCompany = Company::where('user_id', $userId)->first(); // Replace if needed
+        $nextCompany = Company::where('user_id', $ownerId)->first(); // Replace if needed
     
         if ($nextCompany) {
             return response()->json([ 
