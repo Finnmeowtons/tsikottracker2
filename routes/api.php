@@ -52,6 +52,7 @@ Route::get('companies/user/{id}', [CompanyController::class, 'getOwnCompany']);
 
 Route::apiResource('employees', EmployeesApi::class);
 Route::get('employees/user/{id}', [EmployeesApi::class, 'getOwnEmployee']);
+Route::post('offers/android/delete/{id}', [EmployeesApi::class, 'deleteUpdateRetrofit']);
 
 Route::apiResource('customers', CustomersApi::class);
 Route::get('customers/user/{id}', [CustomersApi::class, 'getOwnCustomer']);
