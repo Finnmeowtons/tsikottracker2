@@ -66,7 +66,7 @@ class OffersApi extends Controller
         $offer->company_id = null;
         $offer->save();
 
-        if (!$request){
+        if (!$request->has('name')){
             return response()->json($offer);
         }
 
