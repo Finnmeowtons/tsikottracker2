@@ -13,13 +13,22 @@ class CustomersApi extends Controller
         return response()->json($customers);
     }
 
-    public function getOwnCustomer(Request $request, $id){
+    public function getOwnCustomer(Request $request, $id) {
         $customers = Customer::where('company_id', $id)
-                  ->select('id', 'car_plate_number', 'name', 'company_id',)
-                  ->get();
-
-        return response()->json($customers); 
-        
+                             ->select('name', 'car_plate_number', 'company_id') 
+                             ->get() 
+                             ->groupBy('name'); // Key change
+    
+        // Transform the data
+        $formattedCustomers = $customers->map(function ($customerGroup) {
+            return [
+                'name' => $customerGroup->first()->name, // Assuming all have the same name
+                'car_plate_numbers' => $customerGroup->pluck('car_plate_number')->toArray(),
+                'company_id' => $customerGroup->first()->company_id,
+            ];
+        })->values(); // Convert to a regular array
+    
+        return response()->json($formattedCustomers); 
     }
 
 
