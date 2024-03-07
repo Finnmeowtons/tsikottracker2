@@ -273,6 +273,7 @@ class RecordsApi extends Controller
         ]);
 
         $newRecord->customer_id = $newCustomer->id;
+        $newRecord->created_at = $oldRecord->created_at; 
         $newRecord->save();
 
         // Retire old customer 
