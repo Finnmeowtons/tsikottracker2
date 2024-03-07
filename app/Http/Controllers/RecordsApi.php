@@ -162,6 +162,8 @@ class RecordsApi extends Controller
         return response()->json($record, 201); // 201 Created status
     }
 
+    
+
     public function show(Record $record)
     {
         return response()->json($record);
@@ -179,6 +181,108 @@ class RecordsApi extends Controller
         $record->update($validatedData);
         return response()->json($record);
 
+    }
+
+    public function updateAndRemoveOld(Request $request, $id) 
+    {
+    // Fetch existing record
+    $oldRecord = Record::findOrFail($id);
+
+    // Create new record (inherit values from old record where possible)
+    $newRecord = Record::create($request->all() + ['company_id' => $oldRecord->company_id]); 
+
+    // Update old record foreign keys
+    $oldRecord->customer_id = null;
+    $oldRecord->employee_id = null;
+    $oldRecord->company_id = null; 
+    $oldRecord->save();
+
+    $oldRecord->offers()->detach();
+
+    $offersData = $request->get('offers');
+    foreach ($offersData as $offerData) {
+         // Attempt to find an existing offer with matching price
+         $existingOffer = Offer::where([
+            'name' => $offerData['name'],
+            'type' => $offerData['type'],
+            'price' => $offerData['price'],
+            'company_id' => $request->company_id,
+        ])->first();
+
+        if ($existingOffer) {
+            $offer = $existingOffer; // Reuse the existing offer
+        } else {
+            // Check for existing offer (same name, type, different price)
+            $oldOfferToRetire = Offer::where([
+                'name' => $offerData['name'],
+                'type' => $offerData['type'],
+                'company_id' => $request->company_id,
+            ])->where('price', '!=', $offerData['price'])->first(); // Different price
+
+            if ($oldOfferToRetire) {
+                $oldOfferToRetire->company_id = null;
+                $oldOfferToRetire->save();
+            }
+
+            // Create a new offer
+            $offer = Offer::create([
+                'name' => $offerData['name'],
+                'price' => $offerData['price'],
+                'type' => $offerData['type'],
+                'company_id' => $request->company_id
+            ]);
+        }
+
+        $newRecord->offers()->attach($offer->id); // Attach to the new record
+    }
+
+    if ($request->has('employee_name') && $request->has('employee_position') &&
+        !empty($request->employee_name) && !empty($request->employee_position)) {
+
+        $oldEmployee = $oldRecord->employee; // Fetch existing employee (if any)
+
+        // Find or create employee (with company_id of the new record)
+        $newEmployee = Employee::firstOrCreate([
+            'name' => $request->employee_name,
+            'position' => $request->employee_position,
+        ], [
+            'company_id' => $newRecord->company_id
+        ]);
+
+        $newRecord->employee_id = $newEmployee->id;
+        $newRecord->save();
+
+        // Retire old employee (if exists)
+        if ($oldEmployee) {
+            $oldEmployee->company_id = null;
+            $oldEmployee->save();
+        }
+    }
+
+    // Customer Handling (similar logic as employee)
+    if ($request->has('customer_name') && $request->has('customer_car_plate_number')) {
+
+        $oldCustomer = $oldRecord->customer; // Fetch existing customer (if any)
+
+        // Find or create customer 
+        $newCustomer = Customer::firstOrCreate([
+            'name' => $request->customer_name,
+            'car_plate_number' => $request->customer_car_plate_number,
+        ], [
+            'company_id' => $newRecord->company_id
+        ]);
+
+        $newRecord->customer_id = $newCustomer->id;
+        $newRecord->save();
+
+        // Retire old customer 
+        if ($oldCustomer) {
+            $oldCustomer->company_id = null;
+            $oldCustomer->save();
+        }
+    }
+
+    return response()->json($newRecord, 200); 
     }
 
     public function destroy(Record $record)
