@@ -289,6 +289,6 @@ class RecordsApi extends Controller
     {
         $record->delete();
 
-        return response()->json("Successfully Deleted", 204); // 204 No Content status
+        return response()->json(["message" => "Successfully Deleted"]);
     }
 }
