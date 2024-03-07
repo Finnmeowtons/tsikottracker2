@@ -21,6 +21,7 @@ class RecordsApi extends Controller
     {
         $records = Record::where('company_id', $id)
             ->with(['customer', 'offers', 'employee'])
+            ->orderBy('created_at', 'DESC')
             ->get();
 
         $formattedRecords = $records->map(function ($record) {
