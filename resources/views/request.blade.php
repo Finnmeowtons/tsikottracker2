@@ -94,10 +94,6 @@
                         <label for="contactName" class="form-label">Contact Name</label>
                         <input type="text" class="form-control" id="contactName" name="contactName" required>
                     </div>
-                    <div>
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
-                    </div>
                     <a type="submit" class="btn btn-primary" href="/export-records">Download Excel</a>
                 </form>
             </div>
