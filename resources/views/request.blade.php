@@ -30,7 +30,7 @@
     </section>
     <!-- End Header -->
     <!-- Hero Section -->
-    <section id="hero">
+    <section id="hero" style="background-image: {{ asset('images/hero-bg.jpg') }};">
         <div class="hero container">
 
             <div>
