@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::post('/export-records', [RequestController::class, 'export']); 
+Route::get('/export-records', [RequestController::class, 'export']); 
 
 Route::get('/', function () {
     return view('request');
