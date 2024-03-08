@@ -13,7 +13,7 @@ class RecordsExport implements FromCollection
 
         $data = $records->map(function($record) {
             return [
-                'customer_name' => $record->customer->name,
+                'customer_name' => $record->customer ? $record->customer->name : 'N/A',
                 'employee_name' => $record->employee ? $record->employee->name : 'N/A',
                 'offers' => $this->formatOffers($record->offers), 
                 'created_at' => $record->created_at->format('Y-m-d'), // Customize date format if needed 
