@@ -85,6 +85,8 @@
                 <h1 class="section-title">Request Your <span>Data</span></h1>
             </div>
             <div id="request-form">
+                <form form method="POST" action="/export-records">
+                @csrf
                     <div>
                         <label for="companyName" class="form-label">Company Name</label>
                         <input type="text" class="form-control" id="companyName" name="companyName" required>
@@ -93,8 +95,6 @@
                         <label for="contactName" class="form-label">Contact Name</label>
                         <input type="text" class="form-control" id="contactName" name="contactName" required>
                     </div>
-                <form form method="POST" action="/export-records">
-                @csrf
 
                     <a type="submit" class="btn btn-primary" href="/export-records">Download Excel</a>
                 </form>
