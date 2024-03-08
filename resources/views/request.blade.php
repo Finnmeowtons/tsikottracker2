@@ -85,7 +85,7 @@
                 <h1 class="section-title">Request Your <span>Data</span></h1>
             </div>
             <div id="request-form">
-                <form form method="POST" action="/process-request">
+                <form form method="POST" action="/export-records">
                     <div>
                         <label for="companyName" class="form-label">Company Name</label>
                         <input type="text" class="form-control" id="companyName" name="companyName" required>
