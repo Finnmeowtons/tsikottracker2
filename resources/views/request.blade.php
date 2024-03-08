@@ -86,6 +86,7 @@
             </div>
             <div id="request-form">
                 <form form method="POST" action="/export-records">
+                @csrf
                     <div>
                         <label for="companyName" class="form-label">Company Name</label>
                         <input type="text" class="form-control" id="companyName" name="companyName" required>
