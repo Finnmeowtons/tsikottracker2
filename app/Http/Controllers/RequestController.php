@@ -10,6 +10,6 @@ class RequestController extends Controller
 {
     public function export() 
     {
-        return Excel::download(new RecordsExport, 'users.xlsx');
+        return Excel::download(new RecordsExport, 'customer_data.xlsx');
     }
 }
