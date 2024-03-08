@@ -11,16 +11,6 @@ class RequestController extends Controller
 {
     public function export(Request $request) 
     {
-        $companyName = $request->input('companyName');  // Update here
-    $contactName = $request->input('contactName');
-
-        // Filter records based on companyName and contactName
-        $records = Record::with(['offers', 'employee'])
-                         ->whereHas('customer', function($query) use ($companyName, $contactName) {
-                             $query->where('company_name', 'like', '%' . $companyName . '%') 
-                                   ->where('customer_name', 'like', '%' . $contactName . '%');
-                         })
-                         ->get(); 
         return Excel::download(new RecordsExport, 'customer_data.xlsx');
     }
 }
