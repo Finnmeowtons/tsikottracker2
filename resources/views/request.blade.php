@@ -59,18 +59,18 @@
             </div>
             <div class="service-bottom">
                 <div class="service-item">
-                    <div class="icon"><img src="./img/data-analytics.png" /></div>
+                    <div class="icon"><img src="{{ asset('img/data-analytics.png') }}" /></div>
                     <h2>Analytics</h2>
                     <p>Detailed performance insights for strategic planning.
                     </p>
                 </div>
                 <div class="service-item">
-                    <div class="icon"><img src="./img/request.png" /></div>
+                    <div class="icon"><img src="{{ asset('img/request.png') }}" /></div>
                     <h2>Data Request</h2>
                     <p>Seamlessly access and manage service history.</p>
                 </div>
                 <div class="service-item">
-                    <div class="icon"><img src="./img/data.png" /></div>
+                    <div class="icon"><img src="{{ asset('img/data.png') }}" /></div>
                     <h2>Record Input</h2>
                     <p>Simplified management of business records</p>
                 </div>
@@ -115,7 +115,7 @@
         <div class="container-about">
             <div class="col-left">
                 <div class="img-wrapper">
-                    <img src="./img/Hand-Holding-Phon.png" style="width: 500px; height: 500px;" alt="img">
+                    <img src="{{ asset('img/Hand-Holding-Phon.png') }}" style="width: 500px; height: 500px;" alt="img">
                 </div>
             </div>
             <div class="col-right">
