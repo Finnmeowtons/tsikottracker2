@@ -8,12 +8,8 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class RequestController extends Controller
 {
-    public function exportRecords()
+    public function export() 
     {
-        // 1. Fetch your records (Adapt this part)
-        $records = Record::with(['offers', 'employee'])->get(); 
-
-        // 2. Initiate the download
-        return Excel::download(new RecordsExport($records), 'customer_data.xlsx'); 
+        return Excel::download(new RecordsExport, 'users.xlsx');
     }
 }
