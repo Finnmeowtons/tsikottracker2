@@ -85,9 +85,9 @@
                 <h1 class="section-title">Request Your <span>Data</span></h1>
             </div>
             <div id="request-form">
-                <form>
+                <form form method="POST" action="/process-request">
                     <div>
-                        <label for="companyName" class="form-label">Company/Business Name</label>
+                        <label for="companyName" class="form-label">Company Name</label>
                         <input type="text" class="form-control" id="companyName" name="companyName" required>
                     </div>
                     <div>
@@ -97,11 +97,6 @@
                     <div>
                         <label for="email" class="form-label">Email</label>
                         <input type="email" class="form-control" id="email" name="email" required>
-                    </div>
-                    <p style="font-size: medium;">Please upload a valid ID for person confirmation</label>
-
-                    <div style="margin-bottom: 15px;">
-                        <input type="file" id="myFile" name="filename">
                     </div>
                     <button type="submit" class="btn btn-primary">Submit Request</button>
                 </form>
