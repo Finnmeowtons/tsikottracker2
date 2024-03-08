@@ -11,6 +11,7 @@ class RequestController extends Controller
 {
     public function export(Request $request) 
     {
+        
         return Excel::download(new RecordsExport, 'customer_data.xlsx');
     }
 }

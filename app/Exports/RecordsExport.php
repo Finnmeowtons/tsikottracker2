@@ -9,10 +9,11 @@ class RecordsExport implements FromCollection
 {
     public function collection()
     {
-        $records = Record::with(['offers', 'employee'])->get(); 
+        $records = Record::with(['offers', 'employee', 'customer'])->get(); 
 
         $data = $records->map(function($record) {
             return [
+                'customer_name' => $record->customer->name,
                 'employee_name' => $record->employee ? $record->employee->name : 'N/A',
                 'offers' => $this->formatOffers($record->offers), 
                 'created_at' => $record->created_at->format('Y-m-d'), // Customize date format if needed 
@@ -25,6 +26,7 @@ class RecordsExport implements FromCollection
     public function headings(): array
     {
         return [
+            'customer_name',
             'employee_name',
             'offers',
             'created_at',
