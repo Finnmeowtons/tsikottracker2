@@ -11,8 +11,8 @@ class RequestController extends Controller
 {
     public function export(Request $request) 
     {
-        $companyName = $request->get('companyName'); 
-        $contactName = $request->get('contactName');
+        $companyName = $request->input('companyName');  // Update here
+    $contactName = $request->input('contactName');
 
         // Filter records based on companyName and contactName
         $records = Record::with(['offers', 'employee'])
