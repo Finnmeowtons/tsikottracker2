@@ -22,7 +22,7 @@ class RecordsExport implements FromCollection, WithHeadings
 
             $data[] = [ 
                 'offers' => json_encode($offersData), // Or format how you like
-                'employee_name' => $record->employee->name,
+                'employee_name' => $record->employee->name ? $record->employee->name : 'N/A',
                 'created_at' => $record->created_at,
             ];
         }
