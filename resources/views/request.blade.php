@@ -98,7 +98,7 @@
                         <label for="email" class="form-label">Email</label>
                         <input type="email" class="form-control" id="email" name="email" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit Request</button>
+                    <a type="submit" class="btn btn-primary" href="/export-records">Download Excel</a>
                 </form>
             </div>
         </div>
