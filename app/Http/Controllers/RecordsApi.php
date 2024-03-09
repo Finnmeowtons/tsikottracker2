@@ -8,7 +8,6 @@ use App\Models\Offer;
 use App\Models\Record;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
-use Nette\Utils\DateTime;
 
 class RecordsApi extends Controller
 {
@@ -21,15 +20,12 @@ class RecordsApi extends Controller
     public function getOwnRecord(Request $request, $id)
     {
         $request->validate([
-            'start_date' => 'required',
-            'end_date' => 'required|after_or_equal:start_date'
+            'start_date' => 'required|date_format:Y-m-d',
+            'end_date' => 'required|date_format:Y-m-d|after_or_equal:start_date'
         ]);
     
-        $startDateFormat = "D M d H:i:s T Y"; // Adjust if needed
-
-        $startDate = DateTime::createFromFormat($startDateFormat, $request->input('start_date'));
-        $endDate = DateTime::createFromFormat($startDateFormat, $request->input('end_date'));
-
+        $startDate = $request->input('start_date');
+        $endDate= $request->input('end_date');
 
 
         $records = Record::where('company_id', $id)
