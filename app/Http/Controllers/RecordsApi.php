@@ -19,8 +19,19 @@ class RecordsApi extends Controller
 
     public function getOwnRecord(Request $request, $id)
     {
+        $request->validate([
+            'start_date' => 'required|date_format:Y-m-d',
+            'end_date' => 'required|date_format:Y-m-d|after_or_equal:start_date'
+        ]);
+    
+        $startDate = $request->input('start_date');
+        $endDate= $request->input('end_date');
+
+
         $records = Record::where('company_id', $id)
             ->with(['customer', 'offers', 'employee'])
+            ->whereDate('created_at', '>=', $startDate) // Filter start date
+            ->whereDate('created_at', '<=', $endDate)  // Filter end date
             ->orderBy('created_at', 'ASC')
             ->get();
 
