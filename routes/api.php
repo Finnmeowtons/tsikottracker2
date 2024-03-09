@@ -44,7 +44,7 @@ Route::get('offers/user/{id}', [OffersApi::class, 'getOwnOffer']);
 Route::post('offers/android/delete/{id}', [OffersApi::class, 'deleteUpdateRetrofit']);
 
 Route::apiResource('records', RecordsApi::class);
-Route::get('records/user/{id}', [RecordsApi::class, 'getOwnRecord']);
+Route::post('records/user/{id}', [RecordsApi::class, 'getOwnRecord']);
 Route::post('records/android', [RecordsApi::class, 'storeRetrofit']);
 Route::put('records/android/{id}', [RecordsApi::class, 'updateAndRemoveOld']);
 
