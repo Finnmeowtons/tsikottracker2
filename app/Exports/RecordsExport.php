@@ -42,9 +42,11 @@ class RecordsExport implements FromCollection, WithHeadings
     public function headings(): array
     {
         return [
+            'Company',
             'Customer Name',
             'Plate Number',
             'Employee Name',
+            'Offers',
             'Price',
             'Added'
         ];
