@@ -85,7 +85,7 @@
                 <h1 class="section-title">Request Your <span>Data</span></h1>
             </div>
             <div id="request-form">
-                <form form method="POST" action="/export-records">
+                <form form method="POST" action="/send-excel-report">
                     @csrf
                     <div style="margin-bottom: 16px;">
                     <input type="email" name="email" placeholder="Recipient Email">
