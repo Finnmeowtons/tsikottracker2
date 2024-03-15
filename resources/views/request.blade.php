@@ -94,9 +94,9 @@
                     <div style="margin-bottom: 16px;">
                     <input type="text" name="customer_name" placeholder="Customer Name or Plate Number">
                     </div>
-                    <div id="loading" style="display: none;">Loading...</div> 
+                    <div id="loading" style="display: none;"><p>Loading...</p></div> 
                     <div id="successMessage" style="display: none;" class="alert alert-success">
-                        Excel report sent successfully!
+                        <p>Excel report sent successfully!</p>
                     </div> 
                     <button type="submit" class="btn btn-primary">Send Excel to your Gmail</a>
                 </form>
