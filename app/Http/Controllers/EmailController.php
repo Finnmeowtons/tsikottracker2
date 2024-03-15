@@ -20,6 +20,7 @@ class EmailController extends Controller
         $filePath = Excel::store(new RecordsExport, 'users_data.xlsx', 'public');
         $recipientEmail = $request -> email;
         // Email sending
+        \Log::debug("File path: " . $filePath);
         Mail::send('emails.email', [], function($message) use ($filePath, $recipientEmail) {
             $message->to($recipientEmail)
                     ->subject('Users Data Excel Report')
