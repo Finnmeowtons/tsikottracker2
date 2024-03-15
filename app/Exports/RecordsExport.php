@@ -19,6 +19,7 @@ class RecordsExport implements FromCollection
         $data = []; // Array to hold our formatted data
 
         Record::cursor()->each(function (Record $record) use (&$data) {
+            dd($this->customer_name); 
             if ($record->customer && $record->customer->name === $this->customer_name) {
                 $data[] = [
                     'customer_name' => $record->customer->name
