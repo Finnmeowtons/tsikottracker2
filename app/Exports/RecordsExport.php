@@ -20,8 +20,8 @@ class RecordsExport implements FromCollection
 
         Record::cursor()->each(function (Record $record) use (&$data) {
                 $data[] = [
-                    'customer_name' => $record->customer ? $record->customer->name : 'No Customer',
-                    'employee_name' => $record->employee->name,
+                    'customer_name' => $record->customer ? $record->customer->name : 'No Name',
+                    'employee_name' => $record->employee ? $record->employee->name : 'No Name',
                 'price' => $record->offers->price, // Assuming offers relationship is valid
                 'created_at' => $record->created_at
                 ];
