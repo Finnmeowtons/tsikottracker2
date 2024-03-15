@@ -28,8 +28,5 @@ class EmailController extends Controller
                     ->attach(storage_path('app/public/users_data.xlsx'));  
         });
 
-        return response()->json([
-            'message' => 'Excel report sent successfully!', urldecode($customerName)
-        ]);
     }
 }
