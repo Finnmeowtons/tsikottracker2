@@ -19,6 +19,7 @@ class RecordsExport implements FromCollection
         $data = []; // Array to hold our formatted data
         Record::whereHas('customer', function($query) {
         $decodedName = urldecode($this->customer_name);
+        dd($this->customer_name, $decodedName);
             $query->where('name', $decodedName)
             ->orWhere('car_plate_number', $decodedName);
         })->cursor()->each(function (Record $record) use (&$data) {
