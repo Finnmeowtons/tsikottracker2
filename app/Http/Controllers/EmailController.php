@@ -18,14 +18,13 @@ class EmailController extends Controller
 
         // Excel export
         $filePath = Excel::store(new RecordsExport, 'users_data.xlsx', 'public');
-        dd($filePath);
-        // $recipientEmail = $request -> email;
-        // // Email sending
-        // Mail::send('emails.email', [], function($message) use ($filePath, $recipientEmail) {
-        //     $message->to($recipientEmail)
-        //             ->subject('Users Data Excel Report')
-        //             ->attach(public_path('emails/' . $filePath));  
-        // });
+        $recipientEmail = $request -> email;
+        // Email sending
+        Mail::send('emails.email', [], function($message) use ($filePath, $recipientEmail) {
+            $message->to($recipientEmail)
+                    ->subject('Users Data Excel Report')
+                    ->attach(public_path($filePath));  
+        });
 
         return response()->json([
             'message' => 'Excel report sent successfully!'
