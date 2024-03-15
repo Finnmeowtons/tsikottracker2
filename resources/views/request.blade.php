@@ -201,6 +201,7 @@ document.getElementById('reportForm').addEventListener('submit', function(event)
             document.getElementById('successMessage').style.display = 'block'; 
         })
         .catch(() => {
+            alert('Error sending report: ' + error.message);
             // Handle errors (show error message)
             document.getElementById('loading').style.display = 'none';
         });
