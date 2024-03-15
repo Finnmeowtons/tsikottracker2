@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\CustomersApi;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\EmployeesApi;
 use App\Http\Controllers\OffersApi;
 use App\Http\Controllers\RecordsApi;
@@ -37,7 +38,7 @@ Route::post('/forgotpassword-retrofit', [PasswordResetLinkController::class, 'se
 Route::get('/user/{userId}/companies', [UserController::class, 'getUserCompanies']);
 Route::get('/userss', [UserController::class, 'getAllUsers']);
 
-
+Route::post('/email' , [EmailController::class, 'sendExcelReport']);
 
 Route::apiResource('offers', OffersApi::class);
 Route::get('offers/user/{id}', [OffersApi::class, 'getOwnOffer']);
