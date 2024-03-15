@@ -5,8 +5,9 @@ use App\Models\Customer;
 use App\Models\Record;
 use App\Models\User;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class RecordsExport implements FromCollection
+class RecordsExport implements FromCollection, WithHeadings
 {
     protected $customer_name;
 
