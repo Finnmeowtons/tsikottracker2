@@ -17,7 +17,7 @@ class EmailController extends Controller
         ]);
 
 
-        Excel::store(new RecordsExport, 'users_data.xlsx', 'public');
+        Excel::store(new RecordsExport($customer_name), 'users_data.xlsx', 'public');
         $recipientEmail = $request -> email;
 
         Mail::send('emails.email', [], function($message) use ($recipientEmail) {
