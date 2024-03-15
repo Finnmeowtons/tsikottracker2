@@ -19,7 +19,7 @@ class RecordsExport implements FromCollection
         $data = []; // Array to hold our formatted data
 
         Record::whereHas('customer', function($query) {
-            $query->where('name', 'like', '%' . $this->customer_name . '%'); 
+            $query->where('name', $this->customer_name); 
         })->cursor()->each(function (Record $record) use (&$data) {
             if ($record->customer_id) {
                 $data[] = [
