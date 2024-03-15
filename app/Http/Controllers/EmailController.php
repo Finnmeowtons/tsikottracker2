@@ -10,15 +10,17 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class EmailController extends Controller
 {
-    public function sendExcelReport(Request $request, $customer_name)
+    public function sendExcelReport(Request $request)
     {
         $request->validate([
-            'email' => 'required|email' 
+            'email' => 'required|email',
+            'customer_name' => 'required'
         ]);
+        $customerName = $request->customer_name;
+        $recipientEmail = $request->email; 
 
 
-        Excel::store(new RecordsExport($customer_name), 'users_data.xlsx', 'public');
-        $recipientEmail = $request -> email;
+        Excel::store(new RecordsExport($customerName), 'users_data.xlsx', 'public');
 
         Mail::send('emails.email', [], function($message) use ($recipientEmail) {
             $message->to($recipientEmail)
@@ -27,7 +29,7 @@ class EmailController extends Controller
         });
 
         return response()->json([
-            'message' => 'Excel report sent successfully!', urldecode($customer_name)
+            'message' => 'Excel report sent successfully!', urldecode($customerName)
         ]);
     }
 }

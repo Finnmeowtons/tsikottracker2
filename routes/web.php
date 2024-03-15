@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\Employees;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RequestController;
@@ -37,6 +38,8 @@ Route::get('/analytics', function () {
 Route::get('/offers', function () {
     return view('offers');
 });
+
+Route::post('/send-excel-report', [EmailController::class, 'sendExcelReport']);
 
 
 /*
