@@ -47,7 +47,7 @@ class RecordsExport implements FromCollection, WithHeadings
             'Plate Number',
             'Employee Name',
             'Offers',
-            'Price',
+            'Price (₱)',
             'Added'
         ];
     }
