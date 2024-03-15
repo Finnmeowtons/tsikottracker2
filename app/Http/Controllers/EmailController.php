@@ -27,7 +27,7 @@ class EmailController extends Controller
         });
 
         return response()->json([
-            'message' => 'Excel report sent successfully!', $customer_name
+            'message' => 'Excel report sent successfully!', urldecode($customer_name)
         ]);
     }
 }
