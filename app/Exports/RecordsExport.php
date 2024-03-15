@@ -23,7 +23,7 @@ class RecordsExport implements FromCollection
                     'customer_name' => $record->customer ? $record->customer->name : 'No Name',
                     'customer_car_plate_number' => $record->customer ? $record->customer->car_plate_number : 'No Plate Number',
                     'employee_name' => $record->employee ? $record->employee->name : 'No Name',
-                    'offers' => $record->offers->name, 
+                    // 'offers' => $record->offers->name, 
                     'price' => $record->offers->sum('price'), // Handle empty offers
                     'created_at' => $record->created_at
                 ];
