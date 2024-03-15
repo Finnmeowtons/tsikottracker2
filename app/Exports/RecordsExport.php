@@ -21,10 +21,7 @@ class RecordsExport implements FromCollection
         Record::cursor()->each(function (Record $record) use (&$data) {
             if ($record->customer && $record->customer->name === $this->customer_name) {
                 $data[] = [
-                    'customer_name' => $record->customer->name,
-                    'employee_name' => $record->employee->name,
-                    'price' => $record->offers->price, // Assuming you have a 'price' column
-                    'created_at' => $record->created_at
+                    'customer_name' => $record->customer->name
                 ];
             }
         });
@@ -35,10 +32,7 @@ class RecordsExport implements FromCollection
     public function headings(): array
     {
         return [
-            'customer_name',
-            'employee_name',
-            'price',
-            'created_at'
+            'customer_name'
         ];
     }
 }
