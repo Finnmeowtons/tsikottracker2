@@ -90,7 +90,7 @@
                     <div>
                     <input type="text" name="email" placeholder="E-mail">
                     </div>
-                    <div style="margin: bottom 120px;">
+                    <div style="margin-bottom: 10px;">
                     <input type="text" name="customer_name" placeholder="Customer Name or Plate Number">
                     </div>
                     <a type="submit" class="btn btn-primary">Download Excel</a>
