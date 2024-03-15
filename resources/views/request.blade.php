@@ -46,8 +46,8 @@
     <section id="services">
         <div class="services container">
             <div class="service-top">
-                <h1 class="section-title">Wha<span>t</span> is Ts<span>i</span>kot<span>
-                        T</span>rack<span>e</span>r<span>?</span></h1>
+                <h1 class="section-title">Wha<span>t</span> is Ts<span>i</span>kot
+                        Track<span>e</span>r<span>?</span></h1>
                 <p>Tsikot Tracker isn't just a tool for car service businesses; it's a bridge connecting customers with
                     seamless data access. In addition to empowering businesses with streamlined operations, Tsikot
                     Tracker offers customers the ability to request their data from the company effortlessly. Whether
