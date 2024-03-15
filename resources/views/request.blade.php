@@ -93,7 +93,7 @@
                     <div style="margin-bottom: 16px;">
                     <input type="text" name="customer_name" placeholder="Customer Name or Plate Number">
                     </div>
-                    <a type="submit" class="btn btn-primary" href="/send-excel-report">Download Excel</a>
+                    <button type="submit" class="btn btn-primary">Download Excel</a>
                 </form>
             </div>
         </div>
