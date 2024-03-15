@@ -201,9 +201,10 @@ document.getElementById('reportForm').addEventListener('submit', function(event)
             document.getElementById('successMessage').style.display = 'block'; 
         })
         .catch(() => {
-            alert('Error sending report: ' + error.message);
-            // Handle errors (show error message)
-            document.getElementById('loading').style.display = 'none';
+            const errorMessageDiv = document.createElement('div');
+            errorMessageDiv.classList.add('alert', 'alert-danger');
+            errorMessageDiv.textContent = 'Error sending report: ' + error.message;
+            this.parentNode.insertBefore(errorMessageDiv, this); 
         });
     });
 
