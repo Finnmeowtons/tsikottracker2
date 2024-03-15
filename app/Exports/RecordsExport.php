@@ -22,8 +22,9 @@ class RecordsExport implements FromCollection
             $query->where('name', $decodedName)
             ->orWhere('car_plate_number', $decodedName);
         })->cursor()->each(function (Record $record) use (&$data) {
-            if ($record->customer_id) {
+            if ($record->customer_id || $record->company_id) {
                 $data[] = [
+                    'company_name' => $record->company->name,
                     'customer_name' => $record->customer ? $record->customer->name : '',
                     'customer_car_plate_number' => $record->customer ? $record->customer->car_plate_number : '',
                     'employee_name' => $record->employee ? $record->employee->name : '',
