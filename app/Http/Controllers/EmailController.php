@@ -17,7 +17,7 @@ class EmailController extends Controller
         ]);
 
         // Excel export
-        Excel::store(new RecordsExport, 'users_data.xlsx', 'public/emails');
+        Excel::store(new RecordsExport, 'users_data.xlsx', 'public');
         $recipientEmail = $request -> email;
         // // Email sending
         // \Log::debug("File path: " . $filePath);
