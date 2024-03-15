@@ -12,6 +12,23 @@ class EmailController extends Controller
 {
     public function sendExcelReport(Request $request)
     {
-        return Excel::download(new RecordsExport, 'users.xlsx');
+        $request->validate([
+            'email' => 'required|email' 
+        ]);
+
+        // Excel export
+        $filePath = Excel::store(new RecordsExport, 'users_data.xlsx', 'public');
+
+        $recipientEmail = $request -> email
+        // Email sending
+        Mail::send('emails.users_report', [], function($message) use ($filePath, $recipientEmail) {
+            $message->to($recipientEmail)
+                    ->subject('Users Data Excel Report')
+                    ->attach(public_path('storage/' . $filePath));  
+        });
+
+        return response()->json([
+            'message' => 'Excel report sent successfully!'
+        ]);
     }
 }
