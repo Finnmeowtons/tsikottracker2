@@ -1,6 +1,7 @@
 <?php
 namespace App\Exports;
 
+use App\Models\Customer;
 use App\Models\Record;
 use App\Models\User;
 use Maatwebsite\Excel\Concerns\FromCollection;
@@ -15,6 +16,6 @@ class RecordsExport implements FromCollection
     }
     public function collection()
     {
-        return Record::where('customer_name', $this->name)->get();
+        return Customer::where('name', $this->name)->get();
     }
 }
