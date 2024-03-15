@@ -16,8 +16,29 @@ class RecordsExport implements FromCollection
     }
     public function collection()
     {
-        return Record::whereHas('customer', function($query) {
-            $query->where('name', 'like', '%' . $this->customer_name . '%'); // Note the use of 'like'
-    })->get();
+        $data = []; // Array to hold our formatted data
+
+        Record::cursor()->each(function (Record $record) use (&$data) {
+            if ($record->customer && $record->customer->name === $this->customer_name) {
+                $data[] = [
+                    'customer_name' => $record->customer->name,
+                    'employee_name' => $record->employee->name,
+                    'price' => $record->price, // Assuming you have a 'price' column
+                    'created_at' => $record->created_at
+                ];
+            }
+        });
+
+        return collect($data); // Return as a collection
+    }
+
+    public function headings(): array
+    {
+        return [
+            'customer_name',
+            'employee_name',
+            'price',
+            'created_at'
+        ];
     }
 }
