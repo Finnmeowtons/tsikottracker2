@@ -85,15 +85,20 @@
                 <h1 class="section-title">Request Your <span>Data</span></h1>
             </div>
             <div id="request-form">
-                <form form method="POST" action="/send-excel-report">
+                <form form method="POST" action="/send-excel-report" id="reportForm">
                     @csrf
                     <div style="margin-bottom: 16px;">
                     <input type="email" name="email" placeholder="Recipient Email">
                     </div>
+                    
                     <div style="margin-bottom: 16px;">
                     <input type="text" name="customer_name" placeholder="Customer Name or Plate Number">
                     </div>
-                    <button type="submit" class="btn btn-primary">Download Excel</a>
+                    <div id="loading" style="display: none;">Loading...</div> 
+                    <div id="successMessage" style="display: none;" class="alert alert-success">
+                        Excel report sent successfully!
+                    </div> 
+                    <button type="submit" class="btn btn-primary">Send Excel to your Gmail</a>
                 </form>
             </div>
         </div>
@@ -180,6 +185,27 @@
     </section>
     <!-- End Footer -->
     <script>
+
+document.getElementById('reportForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default submission 
+        document.getElementById('loading').style.display = 'block'; 
+        document.getElementById('successMessage').style.display = 'none'; 
+
+        // Submit form using AJAX (fetch example)
+        fetch('/send-excel-report', { 
+            method: 'POST',
+            body: new FormData(this) 
+        })
+        .then(() => {
+            document.getElementById('loading').style.display = 'none'; 
+            document.getElementById('successMessage').style.display = 'block'; 
+        })
+        .catch(() => {
+            // Handle errors (show error message)
+            document.getElementById('loading').style.display = 'none';
+        });
+    });
+
         const hamburger = document.querySelector('.header .nav-bar .nav-list.hamburger');
         const mobile_menu = document.querySelector('.header .nav-bar .nav-list ul');
         const menu_item = document.querySelectorAll('.header .nav-bar .nav-list ulli a');
