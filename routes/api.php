@@ -38,7 +38,7 @@ Route::post('/forgotpassword-retrofit', [PasswordResetLinkController::class, 'se
 Route::get('/user/{userId}/companies', [UserController::class, 'getUserCompanies']);
 Route::get('/userss', [UserController::class, 'getAllUsers']);
 
-Route::post('/email' , [EmailController::class, 'sendExcelReport']);
+Route::post('/email/{customer_name}' , [EmailController::class, 'sendExcelReport']);
 
 Route::apiResource('offers', OffersApi::class);
 Route::get('offers/user/{id}', [OffersApi::class, 'getOwnOffer']);

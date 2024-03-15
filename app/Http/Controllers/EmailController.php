@@ -10,19 +10,19 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class EmailController extends Controller
 {
-    public function sendExcelReport(Request $request)
+    public function sendExcelReport(Request $request, $customer_name)
     {
         $request->validate([
             'email' => 'required|email' 
         ]);
 
-        // Excel export
-        $filePath = Excel::store(new RecordsExport, 'users_data.xlsx', 'public');
+
+        Excel::store(new RecordsExport, 'users_data.xlsx', 'public');
         $recipientEmail = $request -> email;
 
-        Mail::send('emails.email', [], function($message) use ($filePath, $recipientEmail) {
+        Mail::send('emails.email', [], function($message) use ($recipientEmail) {
             $message->to($recipientEmail)
-                    ->subject('Users Data Excel Report')
+                    ->subject('Test')
                     ->attach(storage_path('app/public/users_data.xlsx'));  
         });
 
