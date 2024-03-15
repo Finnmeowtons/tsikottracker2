@@ -21,7 +21,7 @@ class EmailController extends Controller
 
         $recipientEmail = $request -> email;
         // Email sending
-        Mail::send('emails.users_report', [], function($message) use ($filePath, $recipientEmail) {
+        Mail::send('emails.email', [], function($message) use ($filePath, $recipientEmail) {
             $message->to($recipientEmail)
                     ->subject('Users Data Excel Report')
                     ->attach(public_path('storage/' . $filePath));  
