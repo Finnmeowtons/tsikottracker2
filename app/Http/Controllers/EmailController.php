@@ -23,7 +23,7 @@ class EmailController extends Controller
         Mail::send('emails.email', [], function($message) use ($filePath, $recipientEmail) {
             $message->to($recipientEmail)
                     ->subject('Users Data Excel Report')
-                    ->attach(storage_path('app/public/' . $filePath));  
+                    ->attach(storage_path('app/public/users_data.xlsx'));  
         });
 
         return response()->json([
