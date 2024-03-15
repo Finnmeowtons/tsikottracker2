@@ -16,6 +16,8 @@ class RecordsExport implements FromCollection
     }
     public function collection()
     {
-        return Customer::where('name', $this->name)->get();
+        return Record::whereHas('customer', function($query) {
+            $query->where('name', $this->name);
+        })->get();
     }
 }
