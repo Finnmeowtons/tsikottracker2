@@ -8,16 +8,16 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 
 class RecordsExport implements FromCollection
 {
-    protected $name;
+    protected $customer_name;
 
     public function __construct($customer_name)
     {
-        $this->name = $customer_name;
+        $this->customer_name = $customer_name;
     }
     public function collection()
     {
         return Record::whereHas('customer', function($query) {
-            $query->where('name', $this->name);
+            $query->where('name', $this->customer_name);
         })->get();
     }
 }
