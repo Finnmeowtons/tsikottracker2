@@ -7,14 +7,14 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 
 class RecordsExport implements FromCollection
 {
-    protected $customer_name;
+    protected $name;
 
     public function __construct($customer_name)
     {
-        $this->customer_name = $customer_name;
+        $this->name = $customer_name;
     }
     public function collection()
     {
-        return Record::where('customer_name', $this->customer_name)->get();
+        return Record::where('customer_name', $this->name)->get();
     }
 }
